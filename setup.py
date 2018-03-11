@@ -43,15 +43,19 @@ def _main():
     description = 'Setup development environment.\n\n' \
         'If you have already run this script, it may be necessary to \n' \
         'skip virtual environment and superuser setup. This can be \n' \
-        'done with options `--skip-venv` and `--skip-superuser`.'
+        'done with options `--skip-venv` and `--skip-superuser`.\n\n' \
+        'If you need to use a different version of Python for your \n' \
+        'virtual environment, use the `--venv-python` argument. This \n' \
+        'doesn\'t apply if `--skip-venv` is specified.'
     parser = argparse.ArgumentParser(description=description,
                                      formatter_class=RawTextHelpFormatter)
-    parser.add_argument('--skip-venv', action='store_true')
-    parser.add_argument('--skip-pip', action='store_true')
-    parser.add_argument('--skip-migrate', action='store_true')
-    parser.add_argument('--skip-superuser', action='store_true')
-    parser.add_argument('--skip-server', action='store_true')
-    parser.add_argument('--skip-client', action='store_true')
+    parser.add_argument('--skip-venv', action='store_true', help='skip virtual environment setup')
+    parser.add_argument('--skip-pip', action='store_true', help='skip pip upgrade')
+    parser.add_argument('--skip-migrate', action='store_true', help='skip Django migration')
+    parser.add_argument('--skip-superuser', action='store_true', help='skip Django superuser creation')
+    parser.add_argument('--skip-server', action='store_true', help='skips the entire server setup')
+    parser.add_argument('--skip-client', action='store_true', help='skips client bower/npm setup')
+    parser.add_argument('--venv-python', action='store', help='python to use with virtual environment (for server)')
     args = parser.parse_args()
 
     try:
@@ -61,7 +65,10 @@ def _main():
 
             # Initialize virtual environment.
             if not args.skip_venv:
-                _run_command('virtualenv env')
+                if args.venv_python:
+                    _run_command('virtualenv --python=%s env' % args.venv_python)
+                else:
+                    _run_command('virtualenv env')
             else:
                 print('Skipping virtual environment setup.')
 
