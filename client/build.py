@@ -1,30 +1,38 @@
 """
-Builds the client server. This involves:
-    1. Compiling LESS styles into `compiled.css`.
+Builds the client project. This currently involves:
+    - Compiling LESS styles into single CSS file.
 """
-import sys
 import os
 
-# The `server/` directory where our Django server is.
-CLIENT_DIR = os.path.dirname(os.path.abspath(__file__))
-SITE_CSS_COMPILED = 'compiled.css'
-SITE_LESS = 'main.less'
-DEPENDENCY_FILE = 'bower.json'
+
+# The root directory of the client (directory of this file).
+CLIENT_DIR = os.path.dirname(os.path.realpath(__file__))
+
+STYLE_DIR = os.path.join(CLIENT_DIR, 'static')
+SITE_LESS = 'main.less' # The source style.
+SITE_CSS_COMPILED = 'compiled.css' # The compiled CSS.
 
 
-def styles():
-    """Compile LESS styles"""
-    path = os.path.join(CLIENT_DIR, 'static')
-    os.chdir(path)
-    print('Compiling "%s" styles to "%s"...' % (SITE_LESS, SITE_CSS_COMPILED))
-    os.system('lessc %s %s' % (SITE_LESS, SITE_CSS_COMPILED))
+def _set_directory(subdir):
+    """Set the current working directory"""
+    working_dir = os.path.join(CLIENT_DIR, subdir)
+    os.chdir(working_dir)
+    print('Current directory: %s' % working_dir)
 
-def main(args):
-    """Main function"""
-    print('Building: %s' % args)
-    styles()
-    print('Done.')
+
+def _run_command(command):
+    """Run a system command and print the output"""
+    out = os.system(command)
+    print('%s [%d]' % (command, out))
+    if out is not 0: # Raise an exception if the command fails.
+        raise Exception('Command failed: %s' % command)
+
+
+def compile_less():
+    """Compile LESS styles into single CSS file"""
+    _set_directory(STYLE_DIR)
+    _run_command('lessc %s %s' % (SITE_LESS, SITE_CSS_COMPILED))
+
 
 if __name__ == '__main__':
-    main(sys.argv)
-
+    compile_less()
