@@ -31,7 +31,7 @@ def _run_command(command):
 def compile_less():
     """Compile LESS styles into single CSS file"""
     _set_directory(STYLE_DIR)
-    _run_command('lessc %s %s' % (LESSC_PATH, SITE_LESS, SITE_CSS_COMPILED))
+    _run_command('lessc %s %s' % (SITE_LESS, SITE_CSS_COMPILED))
 
 
 if __name__ == '__main__':
