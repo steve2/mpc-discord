@@ -101,7 +101,8 @@ def _main():
             _run_command('%s -g bower' % npm_install)
             _run_command('%s -g less' % npm_install)
             _set_directory('client')
-            _run_command('npm install')
+            if os.path.exists('package.json'):
+                _run_command('npm install')
             _set_directory(os.path.join('client', 'static'))
             _run_command('bower install')
         else:
