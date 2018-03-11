@@ -13,12 +13,17 @@ from argparse import RawTextHelpFormatter
 import argparse
 import os
 
+
 # The directory of this file should be the root directory of the project.
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 # Path to virtualenv binaries for setup.
-PYTHON = os.path.join(ROOT_DIR, 'server', 'env', 'Scripts', 'python.exe')
-PIP = os.path.join(ROOT_DIR, 'server', 'env', 'Scripts', 'pip.exe')
+if os.name == 'nt':
+    PYTHON = os.path.join(ROOT_DIR, 'server', 'env', 'Scripts', 'python.exe')
+    PIP = os.path.join(ROOT_DIR, 'server', 'env', 'Scripts', 'pip.exe')
+else:
+    PYTHON = os.path.join(ROOT_DIR, 'server', 'env', 'bin', 'python')
+    PIP = os.path.join(ROOT_DIR, 'server', 'env', 'bin', 'pip')
 
 
 def _set_directory(subdir):

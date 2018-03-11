@@ -19,8 +19,10 @@ def _run_command(command):
 
 
 def _run_server():
-    python_path = os.path.join(
-        ROOT_DIR, 'server', 'env', 'Scripts', 'python.exe')
+    if os.name == 'nt':
+        python_path = os.path.join(ROOT_DIR, 'server', 'env', 'Scripts', 'python.exe')
+    else:
+        python_path = os.path.join(ROOT_DIR, 'server', 'env', 'bin', 'python')
     manage_path = os.path.join(ROOT_DIR, 'server', 'manage.py')
     _run_command('%s %s runserver %s' % (python_path, manage_path, DEBUG_PORT))
 
