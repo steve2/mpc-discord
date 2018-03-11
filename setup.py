@@ -95,8 +95,11 @@ def _main():
 
         # Client setup.
         if not args.skip_client:
-            _run_command('npm install -g bower')
-            _run_command('npm install -g less')
+            npm_install = 'npm install'
+            if os.name != 'nt':
+                npm_install = 'sudo ' + npm_install
+            _run_command('%s -g bower' % npm_install)
+            _run_command('%s -g less' % npm_install)
             _set_directory('client')
             _run_command('npm install')
             _set_directory(os.path.join('client', 'static'))
