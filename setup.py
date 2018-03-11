@@ -100,12 +100,18 @@ def _main():
                 npm_install = 'sudo ' + npm_install
             _run_command('%s -g bower' % npm_install)
             _run_command('%s -g less' % npm_install)
-            _set_directory('client')
-            if os.path.exists('package.json'):
+            
+            if os.path.exists(os.path.join('client', 'package.json')):
+                _set_directory('client')
                 _run_command('npm install')
-            _set_directory(os.path.join('client', 'static'))
-            if os.path.exists('bower.json'):
+            else:
+                print('Skipping `npm install` because there was no `package.json` file.')
+
+            if os.path.exists(os.path.join('client', 'static', 'bower.json')):
+                _set_directory(os.path.join('client', 'static'))
                 _run_command('bower install')
+            else:
+                print('Skipping `bower install` because there was no `bower.json` file.')
         else:
             print('Skipping client setup.')
 
