@@ -104,7 +104,8 @@ def _main():
             if os.path.exists('package.json'):
                 _run_command('npm install')
             _set_directory(os.path.join('client', 'static'))
-            _run_command('bower install')
+            if os.path.exists('bower.json'):
+                _run_command('bower install')
         else:
             print('Skipping client setup.')
 
