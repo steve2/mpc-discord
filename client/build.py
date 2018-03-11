@@ -35,4 +35,7 @@ def compile_less():
 
 
 if __name__ == '__main__':
-    compile_less()
+    try:
+        compile_less()
+    except excp:
+        print(excp)

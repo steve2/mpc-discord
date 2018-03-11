@@ -45,8 +45,8 @@ def _main():
         'If you need to use a different version of Python for your \n' \
         'virtual environment, use the `--venv-python` argument. This \n' \
         'doesn\'t apply if `--skip-venv` is specified.'
-    parser = argparse.ArgumentParser(description=description,
-                                     formatter_class=RawTextHelpFormatter)
+    parser = argparse.ArgumentParser(description=description, formatter_class=RawTextHelpFormatter)
+
     parser.add_argument('--skip-venv', action='store_true', help='skip virtual environment setup')
     parser.add_argument('--skip-pip', action='store_true', help='skip pip upgrade')
     parser.add_argument('--skip-migrate', action='store_true', help='skip Django migration')
@@ -95,11 +95,14 @@ def _main():
 
         # Client setup.
         if not args.skip_client:
-            npm_install = 'npm install'
-            if os.name != 'nt':
-                npm_install = 'sudo ' + npm_install
-            _run_command('%s -g bower' % npm_install)
-            _run_command('%s -g less' % npm_install)
+            
+            # Can't seem to install BOWER and LESS this way.
+            # On Ubuntu, this leaves a broken installation.
+            # npm_install = 'npm install'
+            # if os.name != 'nt':
+            #     npm_install = 'sudo ' + npm_install
+            # _run_command('%s -g bower' % npm_install)
+            # _run_command('%s -g less' % npm_install)
             
             if os.path.exists(os.path.join('client', 'package.json')):
                 _set_directory('client')
