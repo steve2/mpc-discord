@@ -8,6 +8,9 @@ import os
 # The root directory of the client (directory of this file).
 CLIENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
+# The path of the `lessc` compiler (needs to be installed using NPM).
+LESSC_PATH = os.path.join(CLIENT_DIR, 'node_modules', 'less', 'bin', 'lessc')
+
 STYLE_DIR = os.path.join(CLIENT_DIR, 'static')
 SITE_LESS = 'main.less' # The source style.
 SITE_CSS_COMPILED = 'compiled.css' # The compiled CSS.
@@ -31,7 +34,7 @@ def _run_command(command):
 def compile_less():
     """Compile LESS styles into single CSS file"""
     _set_directory(STYLE_DIR)
-    _run_command('lessc %s %s' % (SITE_LESS, SITE_CSS_COMPILED))
+    _run_command('%s %s %s' % (LESSC_PATH, SITE_LESS, SITE_CSS_COMPILED))
 
 
 if __name__ == '__main__':
