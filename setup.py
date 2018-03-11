@@ -4,8 +4,6 @@ Runs the application server and client modules.
         - python34
         - virtualenv (pip install virtualenv)
         - npm
-        - bower (npm install -g bower)
-        - lessc (npm install -g lessc)
 """
 
 from threading import Thread
@@ -97,6 +95,8 @@ def _main():
 
         # Client setup.
         if not args.skip_client:
+            _run_command('npm install -g bower')
+            _run_command('npm install -g less')
             _set_directory('client')
             _run_command('npm install')
             _set_directory(os.path.join('client', 'static'))
