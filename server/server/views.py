@@ -1,4 +1,6 @@
-from django.views.generic import TemplateView
+from django.views import View
+from django.http import HttpResponseRedirect
 
-class BaseView(TemplateView):
-    template_name = 'index.html'
+class BaseView(View):
+    def get(self, request):
+        return HttpResponseRedirect('/discord/')

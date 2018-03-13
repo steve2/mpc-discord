@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'discord',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ STATICFILES_DIRS = [
 
 # Destination directory for `collectstatic` command.
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+ 
 
 WSGI_APPLICATION = 'server.wsgi.application'
 
