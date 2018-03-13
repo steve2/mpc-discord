@@ -11,7 +11,29 @@
   <title>Django Server Placeholder</title>
 </head>
 <body>
-  <h1>Django Server Placeholder</h1>
+  <h1>MPC Discord Information</h1>
+
+  <h2>Roles</h2>
+
+  <div>
+    {% for role in roles %}
+      <div>
+        <h5>{{ role.name }}</h5>
+        <small>{{ role }}</small>
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2>Members</h2>
+
+  <div>
+    {% for member in members %}
+      <div>
+        <h5>{{ member.user.username }}</h5>
+        <small>{{ member }}</small>
+      </div>
+    {% endfor %}
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
