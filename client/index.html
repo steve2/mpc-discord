@@ -8,32 +8,88 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="/static/compiled.css">
 
-  <title>Django Server Placeholder</title>
+  <title>MPC Discord Information</title>
 </head>
 <body>
-  <h1>MPC Discord Information</h1>
-
-  <h2>Roles</h2>
-
-  <div>
-    {% for role in roles %}
-      <div>
-        <h5>{{ role.name }}</h5>
-        <small>{{ role }}</small>
-      </div>
-    {% endfor %}
+  
+  <div class="jumbotron jumbotron-fluid mb-0 pb-3">
+    <div class="container">
+      <h1 class="display-4 mb-0">MPC Discord Information</h1>
+      
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item active">Home</li>
+      </ol>
+    </div>
   </div>
 
-  <h2>Members</h2>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2">
 
-  <div>
-    {% for member in members %}
-      <div>
-        <h5>{{ member.user.username }}</h5>
-        <small>{{ member }}</small>
+        <h1 class="font-weight-light mt-3">Roles</h1>
+
+        <hr />
+
+        {% for role in roles %}
+
+          <a href="/discord/role/{{ role.name }}">
+            <h5>{{ role.name }}</h5>
+          </a>
+
+        {% endfor %}
+
       </div>
-    {% endfor %}
+      <div class="col-10 pr-0">
+        
+        <h1 class="font-weight-light mt-3">Members ({{ members|length }})</h2>
+
+        <hr class="mb-0" />
+
+        <div style="max-height:calc(100vh - 276px);overflow-y:scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Player</th>
+                <th scope="col">Roles</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for member in members %}
+  
+                <tr>
+                  <td>
+                    <h5 class="mb-0">
+                      {% if member.user.avatar != None %}
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/{{ member.user.id }}/{{ member.user.avatar }}.jpeg?size=64" />
+                      {% else %}
+                        <img class="avatar" src="https://cdn.discordapp.com/embed/avatars/{{ member.user.discriminator }}.png" height=64 width=64 />
+                      {% endif %}
+                      {{ member.user.username }}
+                    </h5>
+                  </td>
+                  <td class="text-uppercase font-weight-light">
+                    {% for mrole in member.roles %}
+                      {% if mrole.name == 'MPC-Leaders' %}
+                        <span class="badge badge-success">{{ mrole.name }}</span>
+                      {% elif mrole.name == 'MPC-Members' %}
+                        <span class="badge badge-primary">{{ mrole.name }}</span>
+                      {% else %}
+                        <span class="badge badge-danger">{{ mrole.name }}</span>
+                      {% endif %}
+                    {% endfor %}
+                  </td>
+                </tr>
+  
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        
+
+      </div>
+    </div>
   </div>
+
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from server.views import BaseView
-from discord.views import DiscordBotInfo
+from discord.views import Discord, DiscordRole
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('discord/', DiscordBotInfo.as_view()),
+    path('discord/', Discord.as_view()),
+    path('discord/role/<name>', DiscordRole.as_view()),
     path('', BaseView.as_view()),
 ]
