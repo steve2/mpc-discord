@@ -14,13 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls import handler404
+from django.conf.urls.static import static
 from django.urls import path
-from server.views import BaseView
-from discord.views import Discord, DiscordRole
+from server import settings
+from server.views import BaseView, NotFoundView
+from discord.views import Discord, DiscordRole, DiscordMember
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('discord/', Discord.as_view()),
-    path('discord/role/<name>', DiscordRole.as_view()),
+    path('discord/roles/<name>', DiscordRole.as_view()),
+    path('discord/users/<id>', DiscordMember.as_view()),
     path('', BaseView.as_view()),
 ]
+
+handler404 = NotFoundView.as_view()

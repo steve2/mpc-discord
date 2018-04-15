@@ -1,7 +1,9 @@
 server/env/*
+server/static/*
 client/static/compiled.css
 client/package-lock.json
 client/node_modules/*
 client/static/bower_components/*
 __pycache__/
 db.sqlite3
+.vscode/*

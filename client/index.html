@@ -32,7 +32,7 @@
 
         {% for role in roles %}
 
-          <a href="/discord/role/{{ role.name }}">
+          <a href="/discord/roles/{{ role.name }}">
             <h5>{{ role.name }}</h5>
           </a>
 
@@ -64,7 +64,9 @@
                       {% else %}
                         <img class="avatar" src="https://cdn.discordapp.com/embed/avatars/{{ member.user.discriminator }}.png" height=64 width=64 />
                       {% endif %}
-                      {{ member.user.username }}
+                      <a href="/discord/users/{{ member.user.id }}">
+                        {{ member.user.username }}
+                      </a>
                     </h5>
                   </td>
                   <td class="text-uppercase font-weight-light">
@@ -73,8 +75,10 @@
                         <span class="badge badge-success">{{ mrole.name }}</span>
                       {% elif mrole.name == 'MPC-Members' %}
                         <span class="badge badge-primary">{{ mrole.name }}</span>
-                      {% else %}
+                      {% elif mrole.name == 'MPC-Officers' %}
                         <span class="badge badge-danger">{{ mrole.name }}</span>
+                      {% else %}
+                        <span class="badge badge-warning">{{ mrole.name }}</span>
                       {% endif %}
                     {% endfor %}
                   </td>

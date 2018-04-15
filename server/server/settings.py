@@ -80,7 +80,7 @@ STATICFILES_DIRS = [
 
 # Destination directory for `collectstatic` command.
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
- 
+
 
 WSGI_APPLICATION = 'server.wsgi.application'
 

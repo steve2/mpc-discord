@@ -1,3 +1,4 @@
+"""Permissions Table"""
 PERMISSIONS = {
     'Create Instant Invite':    0x1,
     'Kick Members':             0x2,
@@ -9,8 +10,8 @@ PERMISSIONS = {
     'Add Reactions':            0x40,
     'View Audit Log':           0x80,
 
-    'Read Messages':            0x400, # Both 'Read Messages' and 'View Channel'
-    'View Channel':             0x400, # are the same permission.
+    'Read Messages':            0x400,  # Both 'Read Messages' and 'View Channel'
+    'View Channel':             0x400,  # are the same permission.
     'Send Messages':            0x800,
 
     'Send TTS Messages':        0x1000,
@@ -36,6 +37,7 @@ PERMISSIONS = {
     'Manage Webhooks':          0x20000000,
     'Manage Emojis':            0x40000000,
 }
+
 
 def translate(value):
     """converts 32-bit integer value to list of permission names"""

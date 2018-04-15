@@ -1,5 +1,6 @@
-"""
-Builds the client project. This currently involves:
+"""Builds the client application.
+
+This currently involves:
     - Compiling LESS styles into single CSS file.
 """
 import os
@@ -9,8 +10,8 @@ import os
 CLIENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 STYLE_DIR = os.path.join(CLIENT_DIR, 'static')
-SITE_LESS = 'main.less' # The source style.
-SITE_CSS_COMPILED = 'compiled.css' # The compiled CSS.
+SITE_LESS = 'main.less'  # The source style.
+SITE_CSS_COMPILED = 'compiled.css'  # The compiled CSS.
 
 
 def _set_directory(subdir):
@@ -24,7 +25,7 @@ def _run_command(command):
     """Run a system command and print the output"""
     out = os.system(command)
     print('%s [%d]' % (command, out))
-    if out is not 0: # Raise an exception if the command fails.
+    if out is not 0:  # Raise an exception if the command fails.
         raise Exception('Command failed: %s' % command)
 
 
