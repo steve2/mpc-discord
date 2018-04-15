@@ -1,3 +1,3 @@
-# rateme
+# MPC Discord
 
-Playing around with rating systems.
+Playing around with the Discord API.
