@@ -46,7 +46,7 @@ def _run_command(command):
 
 def _print_setup_error(error):
     """Displays the error that occurred during initialization."""
-    print('Setup failed due to:\n\t%s' % str(exception))
+    print('Setup failed due to:\n\t%s' % str(error))
 
 
 ####################################################################
@@ -55,15 +55,15 @@ def _print_setup_error(error):
 #
 ####################################################################
 
-def __main__():
+if __name__ == '__main__':
     
     description = 'Setup development environment.\n\n' \
         'If you have already run this script, it may be necessary to \n' \
         'skip virtual environment and superuser setup. This can be \n' \
         'done with options `--skip-venv` and `--skip-superuser`.\n\n' \
-        'If you need to use a different version of Python for your \n' \
-        'virtual environment, use the `--venv-python` argument. It \n' \
-        'may be necessary to specify Python 3 if both versions are \n' \
+        'If you need to use a different version of Python for your\n' \
+        'virtual environment, use the `--venv-python` argument. It\n' \
+        'may be necessary to specify Python 3 if both versions are\n' \
         'installed. This doesn\'t apply if `--skip-venv` is specified.'
 
     parser = argparse.ArgumentParser(description=description, formatter_class=RawTextHelpFormatter)
@@ -73,7 +73,7 @@ def __main__():
     parser.add_argument('--skip-superuser', action='store_true', help='skip Django superuser creation')
     parser.add_argument('--skip-server', action='store_true', help='skips the entire server setup')
     parser.add_argument('--skip-client', action='store_true', help='skips client bower/npm setup')
-    parser.add_argument('--venv-python', action='store', help='python to use with virtual environment (for server)')
+    parser.add_argument('--venv-python', action='store', help='python to use with virtual environment (for server setup)')
     args = parser.parse_args()
 
     try:
