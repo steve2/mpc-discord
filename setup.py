@@ -31,7 +31,7 @@ else:
 
 def _set_directory(subdir):
     """Sets the current working directory for system commands."""
-    working_dir = os.path.join(ROOT_DIR, subdir)p
+    working_dir = os.path.join(ROOT_DIR, subdir)
     os.chdir(working_dir)
     print('Current directory: %s' % working_dir)
 
